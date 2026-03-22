@@ -4,3 +4,5 @@ CREATE TABLE tasks (
     description TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO tasks (title, description) VALUES ('Learn Testing', 'Write unit tests for the API');
+INSERT INTO tasks (title, description) VALUES ('Implement Authentication', 'Add user authentication to the API');

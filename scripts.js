@@ -1,20 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
     const createTaskButton = document.getElementById('create-task');
-    const taskList = document.getElementById('task-list');
+    const taskListElement = document.getElementById('task-list');
 
     createTaskButton.addEventListener('click', function() {
-        // Implement task creation logic here (e.g., send a POST request to the API)
-        // For simplicity, we'll just display a new task element
-        const newTask = document.createElement('div');
-        newTask.classList.add('task');
-        newTask.innerHTML = `
-            <h3>New Task</h3>
-            <p>Description: This is a new task.</p>
-        `;
-        taskList.appendChild(newTask);
+        // Implement task creation logic here
+        alert('Create task functionality is not yet implemented.');
     });
 
-    // Implement fetching tasks from the API and displaying them here
-    // For simplicity, we'll just display a placeholder message
-    taskList.innerHTML = 'Loading tasks...';
+    // Fetch tasks and display them
+    fetch('/tasks')
+        .then(response => response.json())
+        .then(tasks => {
+            taskListElement.innerHTML = '';
+            tasks.forEach(task => {
+                const taskElement = document.createElement('div');
+                taskElement.textContent = `${task.title} - ${task.description} - ${task.created_at}`;
+                taskListElement.appendChild(taskElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching tasks:', error);
+            taskListElement.textContent = 'Error loading tasks.';
+        });
 });
